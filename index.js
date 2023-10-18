@@ -28,6 +28,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
   const categoryCollection = client.db("automotivesDB").collection("categories")
+  const allCategoryCollection = client.db("automotivesDB").collection("allCategories")
  
   // get method used 
   app.get("/categories",async(req,res)=>{
@@ -35,6 +36,20 @@ async function run() {
     const result = await allBrands.toArray();
     res.send(result)
   })
+
+
+
+ // Post Method use 
+
+ app.post("/allCategories",async(req,res)=>{
+   const newProduct = req.body;
+   const result = await allCategoryCollection.insertOne(newProduct)
+   res.send(result)
+ })
+
+
+
+
 
   } finally {
     
