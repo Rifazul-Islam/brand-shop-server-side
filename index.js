@@ -39,6 +39,7 @@ async function run() {
 
 //  method category data get
 
+
 app.get("/categories/:id", async(req,res)=>{
    const id = req.params.id;
    const query = {_id : new ObjectId(id)};
@@ -50,7 +51,14 @@ app.get("/categories/:id", async(req,res)=>{
 
 
 
+// get data 
 
+app.get("/allCategories/:id",async(req,res)=>{
+  const id = req.params.id;
+  const query = {_id: new ObjectId(id)}
+  const result = await allCategoryCollection.findOne(query)
+  res.send(result)
+})
 
  // Post Method use 
 
