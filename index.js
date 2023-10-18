@@ -29,6 +29,7 @@ async function run() {
   try {
   const categoryCollection = client.db("automotivesDB").collection("categories")
   const allCategoryCollection = client.db("automotivesDB").collection("allCategories")
+  const storesCollection = client.db("automotivesDB").collection("stores")
  
   // get method used 
   app.get("/categories",async(req,res)=>{
@@ -69,7 +70,21 @@ app.get("/allCategories/:id",async(req,res)=>{
  })
 
 
+ // get Method Use Add to Cart 
+app.get("/stores",async(req,res)=>{
+    const cursor = storesCollection.find()
+    const result = await cursor.toArray()
+    res.send(result)
+})
 
+
+
+  // Post Method Use Add to Cart 
+  app.post("/stores",async(req,res)=>{
+    const productStore = req.body ;
+    const result = await storesCollection.insertOne(productStore)
+    res.send(result)
+  })
 
 
   } finally {
