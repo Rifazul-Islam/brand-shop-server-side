@@ -115,6 +115,17 @@ app.get("/stores",async(req,res)=>{
   })
 
 
+
+  // delete method use Add to cart
+  app.delete("/stores/:id",async(req,res)=>{
+     const  id = req.params.id;
+     const query = {_id : new ObjectId(id)};
+     const result = await storesCollection.deleteOne(query);
+     res.send(result)
+
+  })
+
+
   } finally {
     
   }
